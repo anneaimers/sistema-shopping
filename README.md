@@ -8,10 +8,10 @@ e um processo completo de visita: estacionar -> comprar -> pagar -> encerrar.
 
 | Integrante       | Função                                                              |
 
-| Anne Gracie      | tecnologias externas, organização, funcionalidades, classe shopping |
-| Heitor Sena      | classe compra, venda, produto e item_transação                      | 
-| Emanuelly Soares | classes cliente, loja e menu interativo                             |
-| Nicole Simões    | classes estacionamento e carro                                      |
+- Anne Gracie      | tecnologias externas, organização, funcionalidades, classe shopping |
+- Heitor Sena      | classe compra, venda, produto e item_transação                      | 
+- Emanuelly Soares | classes cliente, loja e menu interativo                             |
+- Nicole Simões    | classes estacionamento e carro                                      |
 
 
 ## 📝 Descrição do problema
@@ -39,28 +39,26 @@ completo de visita ao shopping pelo terminal.
 
 ## 🏛️ Principais classes
 
-| Classe         |
-
-| Shopping       |
-| Loja           | 
-| Cliente        |
-| Compra         |
-| Venda          |
-| Produto        |
-| ItemTransação  |
-| Estacionamento | 
-| Carro          | 
-| FluxoCompra    |
-| Main           |
+- Shopping       
+- Loja           
+- Cliente        
+- Compra         
+- Venda          
+- Produto        
+- ItemTransação  
+- Estacionamento 
+- Carro          
+- FluxoCompra    
+- Main           
 
 ## 📋 Regras de negócio
 
-|
-|
-|
-|
-|
-|
+-
+-
+-
+-
+-
+
 
 ## 🛠️ Tecnologias utilizadas
 
