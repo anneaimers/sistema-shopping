@@ -4,14 +4,12 @@ Sistema de gerenciamento de um shopping center em Java, com cadastro de
 shoppings, lojas, clientes, veículos e estacionamentos, controle de compras
 e um processo completo de visita: estacionar -> comprar -> pagar -> encerrar.
 
-## 👥 Integrantes
+## 👥 Integrantes                                                           |
 
-| Integrante       | Função                                                              |
-
-- Anne Gracie      | tecnologias externas, organização, funcionalidades, classe shopping |
-- Heitor Sena      | classe compra, venda, produto e item_transação                      | 
-- Emanuelly Soares | classes cliente, loja e menu interativo                             |
-- Nicole Simões    | classes estacionamento e carro                                      |
+- Anne Gracie: tecnologias externas, organização, funcionalidades, classe shopping 
+- Heitor Sena: classe compra, venda, produto e item_transação                      
+- Emanuelly Soares: classes cliente, loja e menu interativo                            
+- Nicole Simões: classes estacionamento e carro                                      
 
 
 ## 📝 Descrição do problema
