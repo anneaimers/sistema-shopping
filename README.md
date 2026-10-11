@@ -69,36 +69,3 @@ completo de visita ao shopping pelo terminal.
 ## 🔧 Exemplos de utilização
 
 1. Cadastrar um shopping (opção 1):
-
-Nome do shopping: Village Mall
-CNPJ: 12.345.678/0001-90
-Quantidade de lojas: 200
-Shopping "Village Mall" cadastrado com sucesso!
-2. Listar tudo (opção 6):
-
-===== RELATÓRIO GERAL =====
--- Shoppings (1) --
-Shopping{nome='Village Mall', cnpj='12.345.678/0001-90'}
--- Lojas (2) --
-Loja{nome='Livraria Sol', piso='Piso 2'}
-...
-3. Processo completo (opção 7):
-
-===== PROCESSO COMPLETO =====
-Escolha o estacionamento:
-1 - Estacionamento{vagas=100}
-Número: 1
-Carro ABC1D23 estacionado. Vagas livres: 99
-Escolha o cliente:
-1 - Cliente{nome='Maria', cpf='123.456.789-00'}
-Número: 1
-Valor da compra: R$ 150.00
-Compra paga com sucesso!
-Saída registrada. Valor da vaga: R$ 10.0
-
-===== RESUMO DO PROCESSO =====
-Cliente: Maria
-Loja: Livraria Sol
-Compra: R$ 150.0 (PAGA)
-Estacionamento: R$ 10.0
-TOTAL GASTO: R$ 160.0
