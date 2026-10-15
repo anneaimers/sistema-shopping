@@ -1,5 +1,4 @@
 package br.edu.cesupa.model;
-
 import java.util.ArrayList;
 
 public class Cliente {
@@ -12,7 +11,6 @@ public class Cliente {
 
     public Cliente(String nome, String cpf, String email) {
         this.nome = nome;
-        //pq?
         this.cpf = (cpf != null) ? cpf.replace(".","").replace("-","").replace("/", ""):null;
         this.email = email;
         this.compras = new ArrayList<Compra>();
@@ -74,8 +72,4 @@ public class Cliente {
         }
         return total;
     }
-    
-
-    
-    
 }
