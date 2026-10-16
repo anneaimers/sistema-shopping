@@ -1,43 +1,70 @@
 package br.edu.cesupa.model;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class Carro {
 
-    private String nome;
-    private ArrayList<Loja> lojas = new ArrayList<>();
-    private Estacionamento estacionamento;
+   
+    private String placa;
+    private String modelo;
+    private String cor;
+    private LocalDateTime entrada;
+    private LocalDateTime saida;
 
-    public void Shopping(String nome, int totalVagas) {
-        this.nome = nome;
-        this.estacionamento = new Estacionamento();
+    public Carro(String placa, String modelo, String cor) {
+        this.placa = placa;
+        this.modelo = modelo;
+        this.cor = cor;
     }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getPlaca() {
+        return placa;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public String getModelo() {
+        return modelo;
+    }
 
-	public ArrayList<Loja> getLojas() {
-		return lojas;
-	}
+    public String getCor() {
+        return cor;
+    }
 
-	public void setLojas(ArrayList<Loja> lojas) {
-		this.lojas = lojas;
-	}
+    public LocalDateTime getEntrada() {
+        return entrada;
+    }
 
-	public Estacionamento getEstacionamento() {
-		return estacionamento;
-	}
+    public LocalDateTime getSaida() {
+        return saida;
+    }
 
-	public void setEstacionamento(Estacionamento estacionamento) {
-		this.estacionamento = estacionamento;
-	}
+    public void registrarEntrada() {
+        entrada = LocalDateTime.now();
+        saida = null;
+    }
 
-    
+    public void registrarSaida() {
+        saida = LocalDateTime.now();
+    }
 
+    public long calcularTempo() {
+        if (entrada == null) {
+            return 0;
+        }
 
+        if (saida == null) {
+            return ChronoUnit.MINUTES.between(
+                entrada, LocalDateTime.now());
+        }
+
+        return ChronoUnit.MINUTES.between(entrada, saida);
+    }
+
+    public void exibirCarro() {
+        System.out.println("Placa: " + placa);
+        System.out.println("Modelo: " + modelo);
+        System.out.println("Cor: " + cor);
+        System.out.println("Entrada: " + entrada);
+        System.out.println("Saida: " + saida);
+    }
 }
