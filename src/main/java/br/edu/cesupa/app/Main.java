@@ -6,6 +6,7 @@ import br.edu.cesupa.model.Compra;
 import br.edu.cesupa.model.Estacionamento;
 import br.edu.cesupa.model.Loja;
 import br.edu.cesupa.model.Shopping;
+import br.edu.cesupa.service.FluxoCompra;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,7 @@ public class Main {
         System.out.println("4 - Cadastrar Carro");
         System.out.println("5 - Cadastrar Estacionamento");
         System.out.println("6 - Listar tudo");
+        System.out.println("7 - Realizar Fluxo de Compra");
         System.out.println("0 - Sair");
         System.out.print("Escolha uma opção: ");
     }
@@ -58,8 +60,8 @@ public class Main {
     private static void processarOpcao(int opcao) {
         switch (opcao) {
             case 1 -> shoppings.add(Shopping.cadastrar(scanner));
-            case 2 -> lojas.add(Loja.cadastrar(scanner));
-            case 3 -> clientes.add(Cliente.cadastrar(scanner));
+            case 2 -> cadastrarLoja();
+            case 3 -> cadastrarCliente();
             case 4 -> carros.add(Carro.cadastrar(scanner));
             case 5 -> estacionamentos.add(Estacionamento.cadastrar(scanner));
             case 6 -> listarTudo();
@@ -67,6 +69,32 @@ public class Main {
             case 0 -> { /* sai pelo while */ }
             default -> System.out.println("Opção inválida, tente novamente.");
         }
+    }
+
+    private static void cadastrarLoja() {
+        System.out.println("\n--- CADASTRO DE LOJA ---");
+        System.out.print("Nome da Loja: ");
+        String nome = scanner.nextLine();
+        System.out.print("Categoria: ");
+        String categoria = scanner.nextLine();
+        System.out.print("CNPJ: ");
+        String cnpj = scanner.nextLine();
+
+        lojas.add(new Loja(nome, categoria, cnpj));
+        System.out.println("Loja cadastrada com sucesso!");
+    }
+
+    private static void cadastrarCliente() {
+        System.out.println("\n--- CADASTRO DE CLIENTE ---");
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine();
+        System.out.print("CPF: ");
+        String cpf = scanner.nextLine();
+        System.out.print("E-mail: ");
+        String email = scanner.nextLine();
+
+        clientes.add(new Cliente(nome, cpf, email));
+        System.out.println("Cliente cadastrado com sucesso!");
     }
 
     private static void listarTudo() {
