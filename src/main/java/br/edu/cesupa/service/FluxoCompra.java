@@ -31,8 +31,19 @@ public class FluxoCompra {
 
         // ETAPA 1 - ESTACIONAR (adicionarCarro valida lotacao e placa duplicada)
         System.out.println("\n--- Etapa 1: Estacionar ---");
-        Estacionamento estacionamento = escolher(scanner, estacionamentos, "estacionamento");
-        Carro carro = escolher(scanner, carros, "carro");
+
+        System.out.println("\nEscolha o estacionamento:");
+        for (int i = 0; i < estacionamentos.size(); i++) {
+            System.out.println((i + 1) + " - " + estacionamentos.get(i).getNome());
+        }
+        Estacionamento estacionamento = estacionamentos.get(lerIndice(scanner, estacionamentos.size()));
+
+        System.out.println("\nEscolha o carro:");
+        for (int i = 0; i < carros.size(); i++) {
+            Carro c = carros.get(i);
+            System.out.println((i + 1) + " - " + c.getModelo() + " (" + c.getPlaca() + ")");
+        }
+        Carro carro = carros.get(lerIndice(scanner, carros.size()));
 
         estacionamento.adicionarCarro(carro);
 
@@ -43,16 +54,31 @@ public class FluxoCompra {
 
         // ETAPA 2 - VENDER (documento com varios itens, preco de tabela do Produto)
         System.out.println("\n--- Etapa 2: Vender produtos ---");
-        Loja loja = escolher(scanner, lojas, "loja");
-        Cliente cliente = escolher(scanner, clientes, "cliente");
 
-        CompraEVenda venda = new CompraEVenda(loja.getNome(), "venda");
+        System.out.println("\nEscolha a loja:");
+        for (int i = 0; i < lojas.size(); i++) {
+            System.out.println((i + 1) + " - " + lojas.get(i).getNome());
+        }
+        Loja loja = lojas.get(lerIndice(scanner, lojas.size()));
+
+        System.out.println("\nEscolha o cliente:");
+        for (int i = 0; i < clientes.size(); i++) {
+            System.out.println((i + 1) + " - " + clientes.get(i).getNome());
+        }
+        Cliente cliente = clientes.get(lerIndice(scanner, clientes.size()));
+
+        CompraEVenda venda = new CompraEVenda(loja.getNome(), cliente, "venda");
 
         boolean adicionando = true;
         while (adicionando) {
-            Produto produto = escolher(scanner, produtos, "produto");
-            int quantidade = lerInteiro(scanner, "Quantidade: ");
+            System.out.println("\nEscolha o produto:");
+            for (int i = 0; i < produtos.size(); i++) {
+                Produto p = produtos.get(i);
+                System.out.println((i + 1) + " - " + p.getNome() + " (R$ " + p.getPreco() + ")");
+            }
+            Produto produto = produtos.get(lerIndice(scanner, produtos.size()));
 
+            int quantidade = lerInteiro(scanner, "Quantidade: ");
             if (quantidade <= 0) {
                 System.out.println("Quantidade invalida, tente novamente.");
                 continue;
@@ -71,12 +97,20 @@ public class FluxoCompra {
             venda.finalizar();
         } catch (IllegalStateException e) {
             System.out.println("Venda nao finalizada: " + e.getMessage());
-            System.out.println("(O carro continua estacionado.)");
+            System.out.println("(O cliente paga o estacionamento mesmo sem compra.)");
+            estacionamento.removerCarro(carro.getPlaca(), cliente);
             return;
         }
 
         double totalVenda = venda.getTotal();
+        double desconto = venda.calcularDesconto();
+        double totalFinal = venda.getTotalComDesconto();
+
         System.out.println("Total da venda: R$ " + totalVenda);
+        if (desconto > 0) {
+            System.out.println("Desconto aplicado (compra a partir de R$ 500): R$ " + desconto);
+        }
+        System.out.println("Total a pagar: R$ " + totalFinal);
 
         loja.registrarCompraEVenda(venda);        // alimenta faturamento e ticket medio
         cliente.cadastrarCompraEVenda(venda);     // alimenta os pontos do cliente
@@ -86,30 +120,24 @@ public class FluxoCompra {
 
         // ETAPA 4 - ENCERRAR (saida do carro + cobranca da vaga por hora)
         System.out.println("\n--- Etapa 4: Saida do estacionamento ---");
-        estacionamento.removerCarro(carro.getPlaca());
-        double valorVaga = estacionamento.calcularValor(carro);
+        double valorVaga = estacionamento.removerCarro(carro.getPlaca(), cliente);
 
         // RESUMO FINAL
         System.out.println("\n===== RESUMO DO PROCESSO =====");
         System.out.println("Cliente: " + cliente.getNome());
         System.out.println("Loja: " + loja.getNome());
         System.out.println("Data: " + venda.getData());
-        System.out.println("Compra (venda): R$ " + totalVenda);
+        System.out.println("Compra (venda): R$ " + totalFinal);
         System.out.println("Estacionamento: R$ " + valorVaga);
-        System.out.println("TOTAL GASTO: R$ " + (totalVenda + valorVaga));
+        System.out.println("TOTAL GASTO: R$ " + (totalFinal + valorVaga));
         System.out.println("Pontos acumulados pelo cliente: " + cliente.getQuantidadePontos());
     }
 
-    private static <T> T escolher(Scanner scanner, List<T> lista, String tipo) {
-        System.out.println("\nEscolha o " + tipo + ":");
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println((i + 1) + " - " + lista.get(i));
-        }
-
+    private static int lerIndice(Scanner scanner, int tamanho) {
         while (true) {
             int indice = lerInteiro(scanner, "Numero: ") - 1;
-            if (indice >= 0 && indice < lista.size()) {
-                return lista.get(indice);
+            if (indice >= 0 && indice < tamanho) {
+                return indice;
             }
             System.out.println("Opcao invalida, tente novamente.");
         }
@@ -125,4 +153,6 @@ public class FluxoCompra {
             }
         }
     }
+
+
 }

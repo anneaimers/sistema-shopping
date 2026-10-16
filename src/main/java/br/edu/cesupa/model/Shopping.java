@@ -1,6 +1,7 @@
 package br.edu.cesupa.model;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Shopping {
 
@@ -12,7 +13,6 @@ public class Shopping {
 
     public Shopping(String nome, String cnpj, String endereco) {
         this.nome = nome;
-        // limpa o cnpj deixando apenas numeros 
         this.cnpj = (cnpj != null) ? cnpj.replace(".", "").replace("-", "").replace("/", "") : null;
         this.endereco = endereco;
         this.lojas = new ArrayList<Loja>();
@@ -61,24 +61,20 @@ public class Shopping {
             System.out.println("Loja invalida, nao cadastrada!");
             return;
         }
-
         if (buscarLoja(loja.getNome()) != null) {
             System.out.println("Loja ja cadastrada!");
             return;
         }
-
         lojas.add(loja);
         System.out.println("Loja cadastrada no shopping com sucesso!");
     }
 
     public void removerLoja(String nome) {
         Loja loja = buscarLoja(nome);
-
         if (loja == null) {
             System.out.println("Loja nao encontrada!");
             return;
         }
-
         lojas.remove(loja);
         System.out.println("Loja removida!");
     }
@@ -88,14 +84,12 @@ public class Shopping {
             System.out.println("Estacionamento invalido, nao cadastrado!");
             return;
         }
-
         estacionamentos.add(estacionamento);
         System.out.println("Estacionamento cadastrado no shopping com sucesso!");
     }
 
     public int vagasDisponiveis() {
         int total = 0;
-
         for (Estacionamento estacionamento : estacionamentos) {
             total += estacionamento.vagasDisponiveis();
         }
@@ -107,9 +101,8 @@ public class Shopping {
             System.out.println("Nenhuma loja cadastrada.");
             return;
         }
-
         for (Loja loja : lojas) {
-            System.out.println(loja);
+            loja.exibirLoja();
             System.out.println("----------------");
         }
     }
@@ -122,9 +115,14 @@ public class Shopping {
         System.out.println("Vagas livres no shopping: " + vagasDisponiveis());
     }
 
-    @Override
-    public String toString() {
-        return "Shopping{nome='" + nome + "', cnpj='" + cnpj
-                + "', endereco='" + endereco + "', lojas=" + lojas.size() + "}";
+    public static Shopping cadastrar(Scanner scanner) {
+        System.out.println("\n--- CADASTRO DE SHOPPING ---");
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine();
+        System.out.print("CNPJ: ");
+        String cnpj = scanner.nextLine();
+        System.out.print("Endereco: ");
+        String endereco = scanner.nextLine();
+        return new Shopping(nome, cnpj, endereco);
     }
 }

@@ -4,7 +4,7 @@ Sistema de gerenciamento de um shopping center em Java, com cadastro de
 shoppings, lojas, clientes, veículos e estacionamentos, controle de compras
 e um processo completo de visita: estacionar -> comprar -> pagar -> encerrar.
 
-## 👥 Integrantes                                                           |
+## 👥 Integrantes                                                           
 
 - Anne Gracie: tecnologias externas, funcionalidades, classe shopping e fluxo compra
 - Heitor Sena: classe compra e venda, produto                    
@@ -32,8 +32,6 @@ completo de visita ao shopping pelo terminal.
 - Cadastro de Carro
 - Cadastro de Estacionamento
 - Listagem geral de todos os cadastros
-- 
-
 - **Processo completo** (etapa 5): estacionar -> comprar (ou não) -> pagar compra (se houver) + estacionamento-> encerrar, com resumo final do total gasto pelo cliente
 
 ## 🏛️ Principais classes
@@ -46,16 +44,16 @@ completo de visita ao shopping pelo terminal.
 - Estacionamento 
 - Carro          
 - FluxoCompra    
-- Main           
+- Main
+- AppTeste       
 
 ## 📋 Regras de negócio
 
--
--
--
--
--
-
+- Venda não ocorre quando não existe estoque
+- Cálculo da pontuação de acordo com a compra
+- Cálculo de desconto definido a partir de 500 reais
+- Verificação da disponibilidade do produto
+- Cliente paga estacionamento mesmo sem compra
 
 ## 🛠️ Tecnologias utilizadas
 

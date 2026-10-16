@@ -2,10 +2,10 @@ package br.edu.cesupa.model;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Scanner;
 
 public class Carro {
 
-   
     private String placa;
     private String modelo;
     private String cor;
@@ -51,13 +51,21 @@ public class Carro {
         if (entrada == null) {
             return 0;
         }
-
         if (saida == null) {
-            return ChronoUnit.MINUTES.between(
-                entrada, LocalDateTime.now());
+            return ChronoUnit.MINUTES.between(entrada, LocalDateTime.now());
         }
-
         return ChronoUnit.MINUTES.between(entrada, saida);
+    }
+
+    public static Carro cadastrar(Scanner scanner) {
+        System.out.println("\n--- CADASTRO DE CARRO ---");
+        System.out.print("Placa: ");
+        String placa = scanner.nextLine();
+        System.out.print("Modelo: ");
+        String modelo = scanner.nextLine();
+        System.out.print("Cor: ");
+        String cor = scanner.nextLine();
+        return new Carro(placa, modelo, cor);
     }
 
     public void exibirCarro() {

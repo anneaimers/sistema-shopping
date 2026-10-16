@@ -1,6 +1,7 @@
 package br.edu.cesupa.model;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Estacionamento {
 
@@ -58,58 +59,58 @@ public class Estacionamento {
             System.out.println("Estacionamento cheio!");
             return;
         }
-
         if (buscarCarro(carro.getPlaca()) != null) {
             System.out.println("Carro ja cadastrado!");
             return;
         }
-
         carro.registrarEntrada();
         carros.add(carro);
-
         System.out.println("Carro estacionado!");
     }
 
     public double calcularValor(Carro carro) {
         long minutos = carro.calcularTempo();
         long horas = minutos / 60;
-
         if (minutos % 60 != 0) {
             horas++;
         }
-
         if (horas == 0) {
             horas = 1;
         }
         return horas * valorHora;
     }
 
-    public void removerCarro(String placa) {
+    public double removerCarro(String placa) {
+        return removerCarro(placa, null);
+    }
+
+    // cliente paga o estacionamento mesmo sem compra
+    public double removerCarro(String placa, Cliente cliente) {
         Carro carro = buscarCarro(placa);
 
         if (carro == null) {
             System.out.println("Carro nao encontrado!");
-            return;
+            return 0.0;
         }
 
         carro.registrarSaida();
-
         double valor = calcularValor(carro);
-
         System.out.println("Valor a pagar: R$ " + valor);
 
-        carros.remove(carro);
+        if (cliente != null && valor > 0) {
+            cliente.pagarEstacionamento(valor);
+        }
 
+        carros.remove(carro);
         System.out.println("Carro saiu do estacionamento!");
+        return valor;
     }
 
     public void listarCarros() {
-
         if (carros.isEmpty()) {
             System.out.println("Nenhum carro estacionado.");
             return;
         }
-
         for (Carro carro : carros) {
             carro.exibirCarro();
             System.out.println("----------------");
@@ -122,6 +123,34 @@ public class Estacionamento {
         System.out.println("Vagas livres: " + vagasDisponiveis());
     }
 
-    
-    
+    public static Estacionamento cadastrar(Scanner scanner) {
+        System.out.println("\n--- CADASTRO DE ESTACIONAMENTO ---");
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine();
+        int capacidade = lerInteiro(scanner, "Capacidade (vagas): ");
+        double valorHora = lerDouble(scanner, "Valor por hora: ");
+        return new Estacionamento(nome, capacidade, valorHora);
+    }
+
+    private static int lerInteiro(Scanner scanner, String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+            try {
+                return Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Valor invalido, digite um numero inteiro.");
+            }
+        }
+    }
+
+    private static double lerDouble(Scanner scanner, String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+            try {
+                return Double.parseDouble(scanner.nextLine().trim().replace(",", "."));
+            } catch (NumberFormatException e) {
+                System.out.println("Valor invalido, digite um numero.");
+            }
+        }
+    }
 }
