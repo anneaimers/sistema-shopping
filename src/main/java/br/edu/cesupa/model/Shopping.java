@@ -11,13 +11,15 @@ public class Shopping {
     private String endereco;
     private ArrayList<Loja> lojas;
     private ArrayList<Estacionamento> estacionamentos;
+    private ArrayList<Cliente> clientes;
 
     public Shopping(String nome, String cnpj, String endereco) {
         this.nome = nome;
         this.cnpj = (cnpj != null) ? cnpj.replace(".", "").replace("-", "").replace("/", "") : null;
         this.endereco = endereco;
-        this.lojas = new ArrayList<Loja>();
-        this.estacionamentos = new ArrayList<Estacionamento>();
+        this.lojas = new ArrayList<>();
+        this.estacionamentos = new ArrayList<>();
+        this.clientes = new ArrayList<>();
     }
 
     public String getNome() {
@@ -46,6 +48,38 @@ public class Shopping {
 
     public ArrayList<Estacionamento> getEstacionamentos() {
         return estacionamentos;
+    }
+
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void adicionarCliente(Cliente cliente) {
+        if (cliente == null) {
+            System.out.println("Cliente invalido, nao cadastrado!");
+            return;
+        }
+        clientes.add(cliente);
+        System.out.println("Cliente vinculado ao shopping com sucesso!");
+    }
+
+    // REGRA DE NEGOCIO: ranking de clientes por gasto em compras (com desconto),
+    // do maior para o menor. A ordenacao crescente fica na Cliente (clientesOrdenadosPorGasto)
+    // e o percurso de tras para frente entrega o 1o lugar = maior gasto.
+    public void exibirRankingClientes() {
+        System.out.println("RANKING: clientes por gasto em compras (com desconto)");
+        if (clientes.isEmpty()) {
+            System.out.println("Nenhum cliente cadastrado.");
+            return;
+        }
+        List<Cliente> ranking = Cliente.clientesOrdenadosPorGasto(clientes);
+        int posicao = 1;
+        for (int i = ranking.size() - 1; i >= 0; i--) {
+            Cliente cliente = ranking.get(i);
+            System.out.printf("%d - %s: R$ %.2f%n", posicao, cliente.getNome(),
+                    cliente.calcularTotalGastoComDesconto());
+            posicao++;
+        }
     }
 
     public Loja buscarLoja(String nome) {
@@ -107,29 +141,6 @@ public class Shopping {
             System.out.println("----------------");
         }
     }
-
-    public void exibirRankingClientes(List<Cliente> clientes) {
-        System.out.println("RANKING: clientes por gasto em compras (com desconto)");
-
-        if (clientes.isEmpty()) {
-            System.out.println("Nenhum cliente cadastrado.");
-            return;
-        }
-
-        // copia a lista para nao alterar a ordem original de cadastro
-        List<Cliente> ranking = new ArrayList<>(clientes);
-        Cliente.ordenarPorGasto(ranking);
-
-        int posicao = 1;
-        for (int i = ranking.size() - 1; i >= 0; i--) {
-            Cliente cliente = ranking.get(i);
-            System.out.printf("%d - %s: R$ %.2f%n", posicao, cliente.getNome(),
-                    cliente.TotalComDesconto());
-            posicao++;
-        }
-    }
-    
-}
 
     public void exibirShopping() {
         System.out.println("Nome: " + nome);
