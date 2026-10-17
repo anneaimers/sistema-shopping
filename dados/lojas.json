@@ -1,0 +1,98 @@
+[
+  {
+    "nome": "Aurora Moda e Acessorios",
+    "tipo": "Moda e vestuario",
+    "cnpj": "12.345.678/0001-95",
+    "produtos": [
+      1,
+      2,
+      3,
+      10,
+      11
+    ]
+  },
+  {
+    "nome": "Conecta Eletronicos",
+    "tipo": "Informatica e eletronicos",
+    "cnpj": "23.456.789/0001-95",
+    "produtos": [
+      4,
+      5,
+      6,
+      12,
+      13
+    ]
+  },
+  {
+    "nome": "Papelaria Horizonte",
+    "tipo": "Papelaria e material escolar",
+    "cnpj": "34.567.890/0001-30",
+    "produtos": [
+      7,
+      8,
+      9,
+      14,
+      15
+    ]
+  },
+  {
+    "nome": "Passo Certo Calcados",
+    "tipo": "Calcados e bolsas",
+    "cnpj": "45.000.001/0001-74",
+    "produtos": [
+      16,
+      17,
+      18,
+      19,
+      20
+    ]
+  },
+  {
+    "nome": "Movimento Esportes",
+    "tipo": "Artigos esportivos",
+    "cnpj": "45.000.002/0001-19",
+    "produtos": [
+      21,
+      22,
+      23,
+      24,
+      25
+    ]
+  },
+  {
+    "nome": "Essencia Beleza",
+    "tipo": "Cosmeticos e perfumaria",
+    "cnpj": "45.000.003/0001-63",
+    "produtos": [
+      26,
+      27,
+      28,
+      29,
+      30
+    ]
+  },
+  {
+    "nome": "Livraria Entre Paginas",
+    "tipo": "Livros e leitura",
+    "cnpj": "45.000.004/0001-08",
+    "produtos": [
+      31,
+      32,
+      33,
+      34,
+      35
+    ]
+  },
+  {
+    "nome": "Casa Viva Decoracao",
+    "tipo": "Casa e decoracao",
+    "cnpj": "45.000.005/0001-52",
+    "produtos": [
+      36,
+      37,
+      38,
+      39,
+      40
+    ]
+  }
+]

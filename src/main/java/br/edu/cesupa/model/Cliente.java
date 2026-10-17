@@ -54,7 +54,7 @@ public class Cliente {
         return totalEstacionamento;
     }
 
-    // registra o pagamento do estacionamento com ou sem compra
+    // REGRA DE NEGOCIO: registra o pagamento do estacionamento, com ou sem compra
     public void pagarEstacionamento(double valor) {
         if (valor <= 0) {
             System.out.println("Valor invalido, pagamento nao registrado!");
@@ -70,7 +70,7 @@ public class Cliente {
             return;
         }
         compras.add(c);
-        int pontosGanhos = (int) (c.getTotalComDesconto() / 10.0);
+        int pontosGanhos = (int) (c.getTotal() / 10.0);
         this.quantidadePontos += pontosGanhos;
         System.out.println("Compra cadastrada com sucesso! Pontos ganhos: " + pontosGanhos);
     }
@@ -83,8 +83,26 @@ public class Cliente {
         return total;
     }
 
+    // REGRA DE NEGOCIO: gasto total considerando o desconto.
+    // O calculo do desconto (a partir de R$ 500) fica na CompraEVenda, via getTotalComDesconto().
+    public double calcularTotalGastoComDesconto() {
+        double total = 0.0;
+        for (CompraEVenda c : compras) {
+            total += c.getTotalComDesconto();
+        }
+        return total;
+    }
+
+    // Ordena a propria lista recebida (crescente pelo gasto com desconto)
     public static void ordenarPorGasto(List<Cliente> clientes) {
-        clientes.sort(Comparator.comparingDouble(Cliente::calcularTotalGasto));
+        clientes.sort(Comparator.comparingDouble(Cliente::calcularTotalGastoComDesconto));
+    }
+
+    // Devolve uma copia ordenada (crescente) sem alterar a lista original
+    public static List<Cliente> clientesOrdenadosPorGasto(List<Cliente> clientes) {
+        List<Cliente> copia = new ArrayList<>(clientes);
+        copia.sort(Comparator.comparingDouble(Cliente::calcularTotalGastoComDesconto));
+        return copia;
     }
 
     public void exibirCliente() {

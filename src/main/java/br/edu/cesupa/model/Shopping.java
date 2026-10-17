@@ -1,6 +1,7 @@
 package br.edu.cesupa.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Shopping {
@@ -106,6 +107,29 @@ public class Shopping {
             System.out.println("----------------");
         }
     }
+
+    public void exibirRankingClientes(List<Cliente> clientes) {
+        System.out.println("RANKING: clientes por gasto em compras (com desconto)");
+
+        if (clientes.isEmpty()) {
+            System.out.println("Nenhum cliente cadastrado.");
+            return;
+        }
+
+        // copia a lista para nao alterar a ordem original de cadastro
+        List<Cliente> ranking = new ArrayList<>(clientes);
+        Cliente.ordenarPorGasto(ranking);
+
+        int posicao = 1;
+        for (int i = ranking.size() - 1; i >= 0; i--) {
+            Cliente cliente = ranking.get(i);
+            System.out.printf("%d - %s: R$ %.2f%n", posicao, cliente.getNome(),
+                    cliente.TotalComDesconto());
+            posicao++;
+        }
+    }
+    
+}
 
     public void exibirShopping() {
         System.out.println("Nome: " + nome);

@@ -1,0 +1,102 @@
+[
+  {
+    "placa": "QVA1A23",
+    "modelo": "Fiat Argo",
+    "cor": "Branco"
+  },
+  {
+    "placa": "QVB2B34",
+    "modelo": "Volkswagen Gol",
+    "cor": "Prata"
+  },
+  {
+    "placa": "QVC3C45",
+    "modelo": "Chevrolet Onix",
+    "cor": "Preto"
+  },
+  {
+    "placa": "QVD4D56",
+    "modelo": "Hyundai HB20",
+    "cor": "Vermelho"
+  },
+  {
+    "placa": "QVE5E67",
+    "modelo": "Toyota Corolla",
+    "cor": "Cinza"
+  },
+  {
+    "placa": "QVF6F78",
+    "modelo": "Honda Civic",
+    "cor": "Azul"
+  },
+  {
+    "placa": "QVG7G89",
+    "modelo": "Renault Kwid",
+    "cor": "Branco"
+  },
+  {
+    "placa": "QVH8H90",
+    "modelo": "Jeep Renegade",
+    "cor": "Preto"
+  },
+  {
+    "placa": "QVI9I01",
+    "modelo": "Nissan Kicks",
+    "cor": "Prata"
+  },
+  {
+    "placa": "QVJ0J12",
+    "modelo": "Volkswagen Polo",
+    "cor": "Cinza"
+  },
+  {
+    "placa": "QVK1K23",
+    "modelo": "Fiat Mobi",
+    "cor": "Vermelho"
+  },
+  {
+    "placa": "QVL2L34",
+    "modelo": "Chevrolet Tracker",
+    "cor": "Branco"
+  },
+  {
+    "placa": "QVM3M45",
+    "modelo": "Toyota Yaris",
+    "cor": "Prata"
+  },
+  {
+    "placa": "QVN4N56",
+    "modelo": "Honda HR-V",
+    "cor": "Preto"
+  },
+  {
+    "placa": "QVO5O67",
+    "modelo": "Renault Duster",
+    "cor": "Marrom"
+  },
+  {
+    "placa": "QVP6P78",
+    "modelo": "Ford Ka",
+    "cor": "Azul"
+  },
+  {
+    "placa": "QVQ7Q89",
+    "modelo": "Peugeot 208",
+    "cor": "Amarelo"
+  },
+  {
+    "placa": "QVR8R90",
+    "modelo": "Citroen C3",
+    "cor": "Branco"
+  },
+  {
+    "placa": "QVS9S01",
+    "modelo": "Fiat Cronos",
+    "cor": "Cinza"
+  },
+  {
+    "placa": "QVT0T12",
+    "modelo": "Volkswagen T-Cross",
+    "cor": "Verde"
+  }
+]

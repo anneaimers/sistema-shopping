@@ -1,0 +1,102 @@
+[
+  {
+    "nome": "Ana Carolina Lima",
+    "cpf": "123.456.789-09",
+    "email": "ana.carolina@example.com"
+  },
+  {
+    "nome": "Bruno Henrique Costa",
+    "cpf": "234.567.890-92",
+    "email": "bruno.costa@example.com"
+  },
+  {
+    "nome": "Camila Fernandes Rocha",
+    "cpf": "345.678.901-75",
+    "email": "camila.rocha@example.com"
+  },
+  {
+    "nome": "Diego Almeida Santos",
+    "cpf": "456.789.012-49",
+    "email": "diego.santos@example.com"
+  },
+  {
+    "nome": "Juliana Martins Oliveira",
+    "cpf": "567.890.123-03",
+    "email": "juliana.oliveira@example.com"
+  },
+  {
+    "nome": "Gabriel Pereira Almeida",
+    "cpf": "610.000.001-68",
+    "email": "gabriel.almeida@example.com"
+  },
+  {
+    "nome": "Mariana Ribeiro Costa",
+    "cpf": "610.000.002-49",
+    "email": "mariana.costa@example.com"
+  },
+  {
+    "nome": "Lucas Henrique Barbosa",
+    "cpf": "610.000.003-20",
+    "email": "lucas.barbosa@example.com"
+  },
+  {
+    "nome": "Beatriz Souza Mendes",
+    "cpf": "610.000.004-00",
+    "email": "beatriz.mendes@example.com"
+  },
+  {
+    "nome": "Rafael Augusto Nunes",
+    "cpf": "610.000.005-91",
+    "email": "rafael.nunes@example.com"
+  },
+  {
+    "nome": "Fernanda Araujo Dias",
+    "cpf": "610.000.006-72",
+    "email": "fernanda.dias@example.com"
+  },
+  {
+    "nome": "Pedro Henrique Carvalho",
+    "cpf": "610.000.007-53",
+    "email": "pedro.carvalho@example.com"
+  },
+  {
+    "nome": "Larissa Gomes Ferreira",
+    "cpf": "610.000.008-34",
+    "email": "larissa.ferreira@example.com"
+  },
+  {
+    "nome": "Matheus Oliveira Castro",
+    "cpf": "610.000.009-15",
+    "email": "matheus.castro@example.com"
+  },
+  {
+    "nome": "Isabela Rocha Freitas",
+    "cpf": "610.000.010-59",
+    "email": "isabela.freitas@example.com"
+  },
+  {
+    "nome": "Gustavo Martins Lopes",
+    "cpf": "610.000.011-30",
+    "email": "gustavo.lopes@example.com"
+  },
+  {
+    "nome": "Amanda Cristina Silva",
+    "cpf": "610.000.012-10",
+    "email": "amanda.silva@example.com"
+  },
+  {
+    "nome": "Thiago Moreira Alves",
+    "cpf": "610.000.013-00",
+    "email": "thiago.alves@example.com"
+  },
+  {
+    "nome": "Leticia Fernandes Pinto",
+    "cpf": "610.000.014-82",
+    "email": "leticia.pinto@example.com"
+  },
+  {
+    "nome": "Vinicius Lima Cardoso",
+    "cpf": "610.000.015-63",
+    "email": "vinicius.cardoso@example.com"
+  }
+]

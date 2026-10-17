@@ -90,6 +90,71 @@ public class Loja {
         return this.faturamentoTotal / comprasEVendas.size();
     }
 
+    public double calcularMediaPrecoProdutos() {
+        if (produtos.isEmpty()) {
+            return 0.0;
+        }
+        double soma = 0.0;
+        for (Produto p : produtos) {
+            soma += p.getPreco();
+        }
+        return soma / produtos.size();
+    }
+
+
+    public Produto buscarProdutoMaisCaro() {
+        if (produtos.isEmpty()) {
+            return null;
+        }
+        Produto maior = produtos.get(0);
+        for (Produto p : produtos) {
+            if (p.getPreco() > maior.getPreco()) {
+                maior = p;
+            }
+        }
+        return maior;
+    }
+
+    public Produto buscarProdutoMaisBarato() {
+        if (produtos.isEmpty()) {
+            return null;
+        }
+        Produto menor = produtos.get(0);
+        for (Produto p : produtos) {
+            if (p.getPreco() < menor.getPreco()) {
+                menor = p;
+            }
+        }
+        return menor;
+    }
+
+    public CompraEVenda buscarMaiorCompra() {
+        if (comprasEVendas.isEmpty()) {
+            return null;
+        }
+        CompraEVenda maior = comprasEVendas.get(0);
+        for (CompraEVenda c : comprasEVendas) {
+            if (c.getTotalComDesconto() > maior.getTotalComDesconto()) {
+                maior = c;
+            }
+        }
+        return maior;
+    }
+
+    public CompraEVenda buscarMenorCompra() {
+        if (comprasEVendas.isEmpty()) {
+            return null;
+        }
+        CompraEVenda menor = comprasEVendas.get(0);
+        for (CompraEVenda c : comprasEVendas) {
+            if (c.getTotalComDesconto() < menor.getTotalComDesconto()) {
+                menor = c;
+            }
+        }
+        return menor;
+    }
+
+
     public void exibirLoja() {
         System.out.println("Loja: " + nome);
         System.out.println("Categoria: " + categoria);

@@ -1,0 +1,32 @@
+[
+  {
+    "nome": "Patio Central - Coberto",
+    "capacidade": 150,
+    "valor": 12.0
+  },
+  {
+    "nome": "Patio Central - Externo",
+    "capacidade": 100,
+    "valor": 8.0
+  },
+  {
+    "nome": "Parque Norte - Coberto",
+    "capacidade": 120,
+    "valor": 10.0
+  },
+  {
+    "nome": "Parque Norte - Externo",
+    "capacidade": 80,
+    "valor": 7.0
+  },
+  {
+    "nome": "Boulevard Sul - Coberto",
+    "capacidade": 200,
+    "valor": 15.0
+  },
+  {
+    "nome": "Boulevard Sul - Externo",
+    "capacidade": 100,
+    "valor": 9.0
+  }
+]

@@ -1,0 +1,43 @@
+[
+  {
+    "nome": "Shopping Patio Central",
+    "cnpj": "61.234.567/0001-57",
+    "endereco": "Avenida das Palmeiras, 1200 - Centro, Belem - PA",
+    "estacionamentos": [
+      "Patio Central - Coberto",
+      "Patio Central - Externo"
+    ],
+    "lojas": [
+      "Aurora Moda e Acessorios",
+      "Passo Certo Calcados",
+      "Livraria Entre Paginas"
+    ]
+  },
+  {
+    "nome": "Shopping Parque Norte",
+    "cnpj": "72.345.678/0001-68",
+    "endereco": "Avenida dos Ipes, 850 - Parque Norte, Belem - PA",
+    "estacionamentos": [
+      "Parque Norte - Coberto",
+      "Parque Norte - Externo"
+    ],
+    "lojas": [
+      "Conecta Eletronicos",
+      "Movimento Esportes",
+      "Casa Viva Decoracao"
+    ]
+  },
+  {
+    "nome": "Shopping Boulevard Sul",
+    "cnpj": "83.456.789/0001-10",
+    "endereco": "Avenida das Acacias, 2400 - Jardim Sul, Belem - PA",
+    "estacionamentos": [
+      "Boulevard Sul - Coberto",
+      "Boulevard Sul - Externo"
+    ],
+    "lojas": [
+      "Papelaria Horizonte",
+      "Essencia Beleza"
+    ]
+  }
+]
