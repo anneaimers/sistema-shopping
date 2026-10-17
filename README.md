@@ -62,7 +62,3 @@ completo de visita ao shopping pelo terminal.
 - **Gson** (serialização JSON — preparado para importação/exportação de dados)
 - **JUnit** (testes)
 - **Git / GitHub** (versionamento)
-
-## 🔧 Exemplos de utilização
-
-1. Cadastrar um shopping (opção 1):
