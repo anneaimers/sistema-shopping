@@ -29,16 +29,27 @@ public class Main {
     private static int proximoIdProduto = 1;
 
     public static void main(String[] args) {
-        clientes.addAll(GerenciadorJSON.carregarClientes());
+        // ALTERADO: carrega TODAS as entidades salvas, nao apenas clientes
+        GerenciadorJSON.importarTudo(shoppings, lojas, produtos, clientes, compras, carros, estacionamentos);
+
+        // ALTERADO: recalcula o proximo ID de produto com base no maior ID importado,
+        // evitando IDs duplicados depois de carregar os dados salvos
+        for (Produto p : produtos) {
+            if (p.getId() >= proximoIdProduto) {
+                proximoIdProduto = p.getId() + 1;
+            }
+        }
 
         int opcao;
+
         do {
             exibirMenu();
             opcao = lerOpcao();
             processarOpcao(opcao);
         } while (opcao != 0);
 
-        GerenciadorJSON.salvarClientes(clientes);
+        // ALTERADO: salva TODAS as entidades no encerramento, nao apenas clientes
+        GerenciadorJSON.exportarTudo(shoppings, lojas, produtos, clientes, compras, carros, estacionamentos);
         scanner.close();
         System.out.println("Encerrando o sistema. Ate logo!");
     }
@@ -92,24 +103,25 @@ public class Main {
             System.out.println("Nenhum cliente cadastrado.");
             return;
         }
+
         System.out.print("Digite o CPF do cliente que deseja editar: ");
         String cpf = scanner.nextLine().trim();
-        // normaliza igual ao construtor do Cliente (remove . - /)
-        String cpfBusca = cpf.replace(".", "").replace("-", "").replace("/", "");
 
         for (Cliente c : clientes) {
-            if (c.getCpf().equals(cpfBusca)) {
+            if (c.getCpf().equals(cpf)) {
                 System.out.println("Cliente encontrado: " + c.getNome());
                 System.out.print("Novo Nome (ou Enter para manter): ");
                 String novoNome = scanner.nextLine().trim();
                 if (!novoNome.isEmpty()) {
                     c.setNome(novoNome);
                 }
+
                 System.out.print("Novo E-mail (ou Enter para manter): ");
                 String novoEmail = scanner.nextLine().trim();
                 if (!novoEmail.isEmpty()) {
                     c.setEmail(novoEmail);
                 }
+
                 System.out.println("Dados atualizados com sucesso!");
                 return;
             }
@@ -127,13 +139,10 @@ public class Main {
         for (int i = 0; i < produtos.size(); i++) {
             System.out.println((i + 1) + " - " + produtos.get(i).getNome());
         }
+
         int indice = lerInteiro("Qual produto deseja remover (numero): ") - 1;
         if (indice >= 0 && indice < produtos.size()) {
             Produto removido = produtos.remove(indice);
-            // tira o produto tambem da lista interna de cada loja (composicao Loja -> Produto)
-            for (Loja loja : lojas) {
-                loja.getProdutos().remove(removido);
-            }
             System.out.println("Produto '" + removido.getNome() + "' removido com sucesso!");
         } else {
             System.out.println("Opcao invalida.");
@@ -142,6 +151,7 @@ public class Main {
 
     private static void gerarRelatorios() {
         System.out.println("\n===== RELATORIOS OBRIGATORIOS =====");
+
         if (produtos.isEmpty() && clientes.isEmpty()) {
             System.out.println("Dados insuficientes para gerar relatorios.");
             return;
@@ -152,13 +162,13 @@ public class Main {
             somaPrecos += p.getPreco();
         }
         double mediaPreco = produtos.isEmpty() ? 0 : somaPrecos / produtos.size();
-        System.out.printf("1. MEDIA: Preco medio dos produtos: R$ %.2f%n", mediaPreco);
+        System.out.printf("1. MEDIA: Preco medio dos produtos: R$ %.2f\n", mediaPreco);
 
         double totalArrecadado = 0;
         for (CompraEVenda cv : compras) {
-            totalArrecadado += cv.getTotal(); // getTotal() = valor registrado na loja
+            totalArrecadado += cv.getValorTotal();
         }
-        System.out.printf("2. TOTAL: Faturamento total do shopping: R$ %.2f%n", totalArrecadado);
+        System.out.printf("2. TOTAL: Faturamento total do shopping: R$ %.2f\n", totalArrecadado);
 
         if (!produtos.isEmpty()) {
             Produto maisCaro = produtos.get(0);
@@ -184,15 +194,12 @@ public class Main {
             System.out.println("   Nenhum cliente cadastrado para ranking.");
             return;
         }
-        Cliente.ordenarPorGasto(clientes); // ordena crescente pelo gasto com desconto
 
-        // percorre do fim para o comeco: 1o lugar = maior gasto
-        int posicao = 1;
-        for (int i = clientes.size() - 1; i >= 0; i--) {
+        Cliente.ordenarPorGasto(clientes);
+
+        for (int i = 0; i < clientes.size(); i++) {
             Cliente c = clientes.get(i);
-            System.out.println("   " + posicao + "o Lugar: " + c.getNome()
-                    + " - Gasto total (com desconto): R$ " + c.calcularTotalGastoComDesconto());
-            posicao++;
+            System.out.println("   " + (i + 1) + "o Lugar: " + c.getNome() + " - Gasto total: R$ " + c.calcularTotalGasto());
         }
     }
 
@@ -212,6 +219,7 @@ public class Main {
         if (shopping != null) {
             shopping.adicionarLoja(loja);
         }
+
         System.out.println("Loja cadastrada com sucesso!");
     }
 
@@ -243,6 +251,7 @@ public class Main {
             System.out.println("Cadastre uma loja antes de cadastrar produtos.");
             return;
         }
+
         System.out.println("\n--- CADASTRO DE PRODUTO ---");
         System.out.print("Nome do produto: ");
         String nome = scanner.nextLine();
@@ -255,11 +264,13 @@ public class Main {
         for (int i = 0; i < lojas.size(); i++) {
             System.out.println((i + 1) + " - " + lojas.get(i).getNome());
         }
+
         int indice = lerInteiro("Cadastrar em qual loja (numero): ") - 1;
         if (indice < 0 || indice >= lojas.size()) {
             System.out.println("Loja invalida, produto nao cadastrado.");
             return;
         }
+
         lojas.get(indice).cadastrarProduto(produto);
         produtos.add(produto);
         System.out.println("Produto cadastrado com sucesso!");
@@ -270,10 +281,12 @@ public class Main {
             System.out.println("Nenhum shopping cadastrado - item nao vinculado a um shopping.");
             return null;
         }
+
         System.out.println("Shoppings disponiveis:");
         for (int i = 0; i < shoppings.size(); i++) {
             System.out.println((i + 1) + " - " + shoppings.get(i).getNome());
         }
+
         int indice = lerInteiro("Vincular a qual shopping (0 = nenhum): ") - 1;
         if (indice >= 0 && indice < shoppings.size()) {
             return shoppings.get(indice);
@@ -305,36 +318,43 @@ public class Main {
 
     private static void listarTudo() {
         System.out.println("\n===== RELATORIO GERAL =====");
+
         System.out.println("-- Shoppings (" + shoppings.size() + ") --");
         for (Shopping s : shoppings) {
             s.exibirShopping();
             System.out.println("----------------");
         }
+
         System.out.println("-- Lojas (" + lojas.size() + ") --");
         for (Loja l : lojas) {
             l.exibirLoja();
             System.out.println("----------------");
         }
+
         System.out.println("-- Produtos (" + produtos.size() + ") --");
         for (Produto p : produtos) {
             p.exibirProduto();
             System.out.println("----------------");
         }
+
         System.out.println("-- Clientes (" + clientes.size() + ") --");
         for (Cliente c : clientes) {
             c.exibirCliente();
             System.out.println("----------------");
         }
+
         System.out.println("-- Carros (" + carros.size() + ") --");
         for (Carro car : carros) {
             car.exibirCarro();
             System.out.println("----------------");
         }
+
         System.out.println("-- Estacionamentos (" + estacionamentos.size() + ") --");
         for (Estacionamento e : estacionamentos) {
             e.exibirEstacionamento();
             System.out.println("----------------");
         }
+
         System.out.println("-- Compras (" + compras.size() + ") --");
         for (CompraEVenda cv : compras) {
             cv.exibirCompraEVenda();
