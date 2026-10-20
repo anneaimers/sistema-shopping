@@ -1,10 +1,14 @@
 package br.edu.cesupa.model;
 
+import java.util.ArrayList;
+
 public class Loja {
 
     private String nome;
     private String categoria;
     private transient String shopping;
+    private ArrayList<Produto> produtos = new ArrayList<>();
+    private ArrayList<CompraEVenda> compras = new ArrayList<>();
 
     public Loja(String nome, String categoria, String cnpj) {
         setNome(nome);
@@ -58,15 +62,43 @@ public class Loja {
     }
 
     public void cadastrarProduto(Produto produto) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'cadastrarProduto'");
+        if (produto == null) {
+            throw new IllegalArgumentException("Produto invalido, nao cadastrado!");
+        }
+        if (produtos == null) {
+            produtos = new ArrayList<>();
+        }
+        produtos.add(produto);
     }
 
     public void exibirLoja() {
-        throw new UnsupportedOperationException("Unimplemented method 'exibirLoja'");
+        System.out.println("Loja: " + nome);
+        System.out.println("Categoria: " + categoria);
+        System.out.println("CNPJ do shopping: " + shopping);
+        System.out.println("Produtos cadastrados: " + (produtos == null ? 0 : produtos.size()));
     }
 
-	public void registrarCompraEVenda(CompraEVenda venda) {
-		throw new UnsupportedOperationException("Unimplemented method 'registrarCompraEVenda'");
-	}
+    public void registrarCompraEVenda(CompraEVenda venda) {
+        if (venda == null) {
+            throw new IllegalArgumentException("Compra invalida, nao registrada!");
+        }
+        if (compras == null) {
+            compras = new ArrayList<>();
+        }
+        compras.add(venda);
+    }
+
+    public ArrayList<Produto> getProdutos() {
+        if (produtos == null) {
+            produtos = new ArrayList<>();
+        }
+        return produtos;
+    }
+
+    public ArrayList<CompraEVenda> getCompras() {
+        if (compras == null) {
+            compras = new ArrayList<>();
+        }
+        return compras;
+    }
 }

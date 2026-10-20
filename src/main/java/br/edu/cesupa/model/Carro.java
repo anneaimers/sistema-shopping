@@ -14,10 +14,13 @@ public class Carro {
     private LocalDateTime saida;
 
     public Carro(String placa, String modelo, String cor) {
-        this.placa = normalizarPlaca(placa);
-        this.modelo = modelo;
-        this.cor = cor;
+    setPlaca(placa);
+    if (!placaValida()) {
+        throw new IllegalArgumentException("Placa invalida: " + placa);
     }
+    this.modelo = modelo;
+    this.cor = cor;
+}
 
     public String getPlaca() {
         return placa;
@@ -77,10 +80,9 @@ public class Carro {
         System.out.println("Saida: " + saida);
     }
 
-    // ==================== ADICIONADO: normalizacao de placa ====================
 
-    // Deixa a placa sempre no mesmo formato: so letras e numeros, em maiuscula.
-    // Assim "abc-1234", " ABC1234 " e "abc1234" viram todos "ABC1234".
+    // a placa sempre no mesmo formato: so letras e numeros, em maiuscula
+    // Assim "abc-1234", ABC1234  e abc1234 viram todos ABC1234
     public static String normalizarPlaca(String placa) {
         if (placa == null) {
             return "";
@@ -88,12 +90,12 @@ public class Carro {
         return placa.replaceAll("[^A-Za-z0-9]", "").toUpperCase(Locale.ROOT);
     }
 
-    // Usado na importacao do JSON, porque o Gson nao passa pelo construtor
+    // usado na importacao do JSON, porque o Gson nao passa pelo construtor
     public void setPlaca(String placa) {
         this.placa = normalizarPlaca(placa);
     }
 
-    // Aceita o padrao antigo (ABC1234) e o Mercosul (ABC1D23)
+    // aceita o padrao antigo (ABC1234) e o Mercosul (ABC1D23)
     public boolean placaValida() {
         if (placa == null || placa.isEmpty()) {
             return false;
@@ -101,7 +103,7 @@ public class Carro {
         return placa.matches("[A-Z]{3}[0-9][A-Z0-9][0-9]{2}");
     }
 
-    // Dois carros sao iguais quando a placa normalizada e igual
+    // dois carros sao iguais quando a placa normalizada e igual
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

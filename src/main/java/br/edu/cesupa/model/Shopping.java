@@ -95,26 +95,12 @@ public class Shopping {
     }
 
     public void adicionarLoja(Loja loja) {
-        if (loja == null || loja.getNome() == null || loja.getNome().isBlank()) {
+        if (loja == null) {
             System.out.println("Loja invalida, nao cadastrada!");
-            return;
-        }
-        if (buscarLoja(loja.getNome()) != null) {
-            System.out.println("Loja ja cadastrada!");
             return;
         }
         lojas.add(loja);
         System.out.println("Loja cadastrada no shopping com sucesso!");
-    }
-
-    public void removerLoja(String nome) {
-        Loja loja = buscarLoja(nome);
-        if (loja == null) {
-            System.out.println("Loja nao encontrada!");
-            return;
-        }
-        lojas.remove(loja);
-        System.out.println("Loja removida!");
     }
 
     public void adicionarEstacionamento(Estacionamento estacionamento) {
@@ -164,7 +150,6 @@ public class Shopping {
         return new Shopping(nome, cnpj, endereco);
     }
 
-    // ==================== ADICIONADO: identidade do shopping ====================
 
     // Remove espaco invisivel (U+00A0), acento, espaco duplicado e maiuscula.
     // " Shopping  Center " e "SHOPPING CENTER" viram "shopping center".
@@ -199,23 +184,35 @@ public class Shopping {
     }
 
     public static String texto(String valor) {
-    if (valor == null) {
-        return "";
-    }
-    String semEspacoInvisivel = valor.replace('\u00A0', ' ');
-    String semAcento = java.text.Normalizer
-            .normalize(semEspacoInvisivel, java.text.Normalizer.Form.NFD)
-            .replaceAll("\\p{M}", "");
-    return semAcento.strip()
-            .replaceAll("\\s+", " ")
-            .toLowerCase(java.util.Locale.ROOT);
-}
-
-    public static String semEspacos(String valor, String string) {
-        throw new UnsupportedOperationException("Unimplemented method 'semEspacos'");
+        if (valor == null) {
+            return "";
+        }
+        String semEspacoInvisivel = valor.replace('\u00A0', ' ');
+        String semAcento = Normalizer
+                .normalize(semEspacoInvisivel, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "");
+        return semAcento.strip()
+                .replaceAll("\\s+", " ")
+                .toLowerCase(Locale.ROOT);
     }
 
-    public static double valorNaoNegativo(double preco, String string) {
-        throw new UnsupportedOperationException("Unimplemented method 'valorNaoNegativo'");
+    // remove TODOS os espacos .
+    // Util para placa, CNPJ e CPF. Mantem maiuscula/minuscula como veio.
+    public static String semEspacos(String valor, String campo) {
+        if (valor == null) {
+            return "";
+        }
+        return valor.replace('\u00A0', ' ').replaceAll("\\s+", "");
+    }
+
+    // valida que o valor e um numero real e nao negativo.
+    public static double valorNaoNegativo(double preco, String campo) {
+        if (!Double.isFinite(preco)) {
+            throw new IllegalArgumentException("Valor invalido para " + campo + "!");
+        }
+        if (preco < 0) {
+            throw new IllegalArgumentException("Valor de " + campo + " nao pode ser negativo!");
+        }
+        return preco;
     }
 }

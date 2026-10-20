@@ -45,7 +45,7 @@ public class Estacionamento {
         return capacidade - carros.size();
     }
 
-    // ALTERADO: compara sempre a placa normalizada
+    //compara sempre a placa normalizada
     public Carro buscarCarro(String placa) {
         String placaNormalizada = Carro.normalizarPlaca(placa);
         for (Carro carro : carros) {
@@ -56,7 +56,7 @@ public class Estacionamento {
         return null;
     }
 
-    // ALTERADO: a duplicidade e verificada ANTES da lotacao,
+    // a duplicidade e verificada ANTES da lotacao,
     // para o usuario receber o motivo correto da recusa
     public void adicionarCarro(Carro carro) {
         if (carro == null) {
@@ -155,6 +155,4 @@ public class Estacionamento {
         }
     }
 
-    // >>> MANTENHA AQUI O SEU METODO lerDouble EXATAMENTE COMO ESTA <<<
-    // (ele nao foi alterado, por isso nao foi reescrito)
 }

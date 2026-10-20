@@ -29,11 +29,8 @@ public class Main {
     private static int proximoIdProduto = 1;
 
     public static void main(String[] args) {
-        // ALTERADO: carrega TODAS as entidades salvas, nao apenas clientes
         GerenciadorJSON.importarTudo(shoppings, lojas, produtos, clientes, compras, carros, estacionamentos);
 
-        // ALTERADO: recalcula o proximo ID de produto com base no maior ID importado,
-        // evitando IDs duplicados depois de carregar os dados salvos
         for (Produto p : produtos) {
             if (p.getId() >= proximoIdProduto) {
                 proximoIdProduto = p.getId() + 1;
@@ -48,7 +45,6 @@ public class Main {
             processarOpcao(opcao);
         } while (opcao != 0);
 
-        // ALTERADO: salva TODAS as entidades no encerramento, nao apenas clientes
         GerenciadorJSON.exportarTudo(shoppings, lojas, produtos, clientes, compras, carros, estacionamentos);
         scanner.close();
         System.out.println("Encerrando o sistema. Ate logo!");
@@ -81,10 +77,10 @@ public class Main {
 
     private static void processarOpcao(int opcao) {
         switch (opcao) {
-            case 1 -> shoppings.add(Shopping.cadastrar(scanner));
+            case 1 -> cadastrarShopping();
             case 2 -> cadastrarLoja();
             case 3 -> cadastrarCliente();
-            case 4 -> carros.add(Carro.cadastrar(scanner));
+            case 4 -> cadastrarCarro();
             case 5 -> cadastrarEstacionamento();
             case 6 -> cadastrarProduto();
             case 7 -> listarTudo();
@@ -95,6 +91,40 @@ public class Main {
             case 0 -> {}
             default -> System.out.println("Opcao invalida, tente novamente.");
         }
+    }
+
+    // ADICIONADO: impede shopping duplicado, ignorando espaco em branco,
+    // maiuscula, acento e espaco invisivel (U+00A0).
+    private static void cadastrarShopping() {
+        Shopping novo = Shopping.cadastrar(scanner);
+
+        for (Shopping existente : shoppings) {
+            if (existente.mesmaIdentidade(novo)) {
+                System.out.println("Ja existe um shopping com esses dados: "
+                        + existente.getNome() + " - cadastro cancelado.");
+                return;
+            }
+        }
+
+        shoppings.add(novo);
+        System.out.println("Shopping cadastrado com sucesso!");
+    }
+
+    // impede carro com placa repetida, mesmo escrita de forma diferente
+    // abc-1234 e ABC1234 sao a mesma placa
+    private static void cadastrarCarro() {
+        Carro novo = Carro.cadastrar(scanner);
+
+        for (Carro existente : carros) {
+            if (existente.equals(novo)) {
+                System.out.println("Ja existe um carro cadastrado com a placa "
+                        + existente.getPlaca() + " - cadastro cancelado.");
+                return;
+            }
+        }
+
+        carros.add(novo);
+        System.out.println("Carro cadastrado com sucesso!");
     }
 
     private static void editarCliente() {
@@ -203,22 +233,32 @@ public class Main {
         }
     }
 
+    // o shopping e escolhido ANTES de criar a loja
+    // sem shopping existente, a loja nao e criada
     private static void cadastrarLoja() {
         System.out.println("\n--- CADASTRO DE LOJA ---");
+
+        if (shoppings.isEmpty()) {
+            System.out.println("Nenhum shopping cadastrado. Cadastre um shopping antes de cadastrar uma loja.");
+            return;
+        }
+
+        Shopping shopping = escolherShopping();
+        if (shopping == null) {
+            System.out.println("Loja nao cadastrada: e obrigatorio vincular a um shopping existente.");
+            return;
+        }
+
         System.out.print("Nome da Loja: ");
         String nome = scanner.nextLine();
         System.out.print("Categoria: ");
         String categoria = scanner.nextLine();
-        System.out.print("CNPJ: ");
-        String cnpj = scanner.nextLine();
 
-        Loja loja = new Loja(nome, categoria, cnpj);
+        String cnpjShopping = (shopping.getCnpj() != null) ? shopping.getCnpj() : "";
+
+        Loja loja = new Loja(nome, categoria, cnpjShopping);
         lojas.add(loja);
-
-        Shopping shopping = escolherShopping();
-        if (shopping != null) {
-            shopping.adicionarLoja(loja);
-        }
+        shopping.adicionarLoja(loja);
 
         System.out.println("Loja cadastrada com sucesso!");
     }

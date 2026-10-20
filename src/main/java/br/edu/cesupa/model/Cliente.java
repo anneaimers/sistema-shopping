@@ -83,8 +83,8 @@ public class Cliente {
         return total;
     }
 
-    // REGRA DE NEGOCIO: gasto total considerando o desconto.
-    // O calculo do desconto (a partir de R$ 500) fica na CompraEVenda, via getTotalComDesconto().
+    // REGRA DE NEGOCIO: gasto total considerando o desconto
+    // O calculo do desconto (a partir de R$ 500) fica na CompraEVenda, via getTotalComDesconto()
     public double calcularTotalGastoComDesconto() {
         double total = 0.0;
         for (CompraEVenda c : compras) {
@@ -93,12 +93,12 @@ public class Cliente {
         return total;
     }
 
-    // Ordena a propria lista recebida (crescente pelo gasto com desconto)
+    // ordena a propria lista recebida (crescente pelo gasto com desconto)
     public static void ordenarPorGasto(List<Cliente> clientes) {
         clientes.sort(Comparator.comparingDouble(Cliente::calcularTotalGastoComDesconto));
     }
 
-    // Devolve uma copia ordenada (crescente) sem alterar a lista original
+    // devolve uma copia ordenada (crescente) sem alterar a lista original
     public static List<Cliente> clientesOrdenadosPorGasto(List<Cliente> clientes) {
         List<Cliente> copia = new ArrayList<>(clientes);
         copia.sort(Comparator.comparingDouble(Cliente::calcularTotalGastoComDesconto));
@@ -113,7 +113,8 @@ public class Cliente {
         System.out.println("Total pago em estacionamentos: R$ " + totalEstacionamento);
     }
 
-    // Regra compartilhada de validacao/cadastro.
+    // regras compartilhada de validacao
+    
     public static String cpf(String valor) {
         String texto = Shopping.semEspacos(valor, "CPF");
         if (!texto.matches("[0-9]{11}|[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}"))
@@ -122,7 +123,6 @@ public class Cliente {
     }
 
 
-    // Regra compartilhada de validacao/cadastro.
     public static String email(String valor) {
         String texto = Shopping.semEspacos(valor, "E-mail").toLowerCase(java.util.Locale.ROOT);
         if (!texto.matches("[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+")
@@ -132,7 +132,6 @@ public class Cliente {
     }
 
 
-    // Regra compartilhada de validacao/cadastro.
     public static void validarCliente(List<Cliente> clientes, Cliente atual, String cpf, String email) {
         String documento = Cliente.cpf(cpf);
         String endereco = Cliente.email(email);
@@ -146,14 +145,12 @@ public class Cliente {
     }
 
 
-    // Regra compartilhada de validacao/cadastro.
     public static void adicionarCliente(List<Cliente> clientes, Cliente cliente) {
         validarCliente(clientes, null, cliente.getCpf(), cliente.getEmail());
         clientes.add(cliente);
     }
 
 
-    // Regra compartilhada de validacao/cadastro.
     public static void editarCliente(List<Cliente> clientes, Cliente cliente, String nome, String email) {
         if (!clientes.contains(cliente)) throw new IllegalArgumentException("Cliente nao cadastrado!");
         String novoNome = Shopping.texto(nome);
