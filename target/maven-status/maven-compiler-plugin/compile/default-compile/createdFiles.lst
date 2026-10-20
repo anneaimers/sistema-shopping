@@ -1,0 +1,10 @@
+br\edu\cesupa\model\CompraEVenda.class
+br\edu\cesupa\model\Produto.class
+br\edu\cesupa\service\GerenciadorJSON.class
+br\edu\cesupa\model\Carro.class
+br\edu\cesupa\service\FluxoCompra.class
+br\edu\cesupa\app\Main.class
+br\edu\cesupa\model\Loja.class
+br\edu\cesupa\model\Cliente.class
+br\edu\cesupa\model\Estacionamento.class
+br\edu\cesupa\model\Shopping.class

@@ -14,9 +14,9 @@ public class Cliente {
     private double totalEstacionamento;
 
     public Cliente(String nome, String cpf, String email) {
-        this.nome = nome;
-        this.cpf = (cpf != null) ? cpf.replace(".", "").replace("-", "").replace("/", "") : null;
-        this.email = email;
+        this.nome = Shopping.texto(nome);
+        this.cpf = Cliente.cpf(cpf);
+        this.email = Cliente.email(email);
         this.compras = new ArrayList<>();
         this.quantidadePontos = 0;
         this.totalEstacionamento = 0.0;
@@ -27,7 +27,7 @@ public class Cliente {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = Shopping.texto(nome );
     }
 
     public String getCpf() {
@@ -39,7 +39,7 @@ public class Cliente {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = Cliente.email(email);
     }
 
     public ArrayList<CompraEVenda> getCompras() {
@@ -56,7 +56,7 @@ public class Cliente {
 
     // REGRA DE NEGOCIO: registra o pagamento do estacionamento, com ou sem compra
     public void pagarEstacionamento(double valor) {
-        if (valor <= 0) {
+        if (!Double.isFinite(valor) || valor <= 0) {
             System.out.println("Valor invalido, pagamento nao registrado!");
             return;
         }
@@ -70,7 +70,7 @@ public class Cliente {
             return;
         }
         compras.add(c);
-        int pontosGanhos = (int) (c.getTotal() / 10.0);
+        int pontosGanhos = (int) (c.getTotalComDesconto() / 10.0);
         this.quantidadePontos += pontosGanhos;
         System.out.println("Compra cadastrada com sucesso! Pontos ganhos: " + pontosGanhos);
     }
@@ -112,4 +112,55 @@ public class Cliente {
         System.out.println("Pontos: " + quantidadePontos);
         System.out.println("Total pago em estacionamentos: R$ " + totalEstacionamento);
     }
+
+    // Regra compartilhada de validacao/cadastro.
+    public static String cpf(String valor) {
+        String texto = Shopping.semEspacos(valor, "CPF");
+        if (!texto.matches("[0-9]{11}|[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}"))
+            throw new IllegalArgumentException("CPF deve ter 11 digitos, com ou sem mascara!");
+        return texto.replace(".", "").replace("-", "");
+    }
+
+
+    // Regra compartilhada de validacao/cadastro.
+    public static String email(String valor) {
+        String texto = Shopping.semEspacos(valor, "E-mail").toLowerCase(java.util.Locale.ROOT);
+        if (!texto.matches("[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+")
+                || texto.startsWith(".") || texto.contains("..") || texto.contains(".@"))
+            throw new IllegalArgumentException("E-mail invalido! Exemplo: nome@dominio.com");
+        return texto;
+    }
+
+
+    // Regra compartilhada de validacao/cadastro.
+    public static void validarCliente(List<Cliente> clientes, Cliente atual, String cpf, String email) {
+        String documento = Cliente.cpf(cpf);
+        String endereco = Cliente.email(email);
+        for (Cliente existente : clientes) {
+            if (existente == atual) continue;
+            if (Cliente.cpf(existente.getCpf()).equals(documento))
+                throw new IllegalArgumentException("CPF ja cadastrado!");
+            if (Cliente.email(existente.getEmail()).equals(endereco))
+                throw new IllegalArgumentException("E-mail ja cadastrado!");
+        }
+    }
+
+
+    // Regra compartilhada de validacao/cadastro.
+    public static void adicionarCliente(List<Cliente> clientes, Cliente cliente) {
+        validarCliente(clientes, null, cliente.getCpf(), cliente.getEmail());
+        clientes.add(cliente);
+    }
+
+
+    // Regra compartilhada de validacao/cadastro.
+    public static void editarCliente(List<Cliente> clientes, Cliente cliente, String nome, String email) {
+        if (!clientes.contains(cliente)) throw new IllegalArgumentException("Cliente nao cadastrado!");
+        String novoNome = Shopping.texto(nome);
+        String novoEmail = Cliente.email(email);
+        validarCliente(clientes, cliente, cliente.getCpf(), novoEmail);
+        cliente.setNome(novoNome);
+        cliente.setEmail(novoEmail);
+    }
+
 }

@@ -1,7 +1,9 @@
 package br.edu.cesupa.model;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Shopping {
@@ -76,7 +78,8 @@ public class Shopping {
         int posicao = 1;
         for (int i = ranking.size() - 1; i >= 0; i--) {
             Cliente cliente = ranking.get(i);
-            System.out.printf("%d - %s: R$ %.2f%n", posicao, cliente.getNome(),
+            System.out.printf("%d - %s: R$ %.2f%n", posicao,
+                    cliente.getNome(),
                     cliente.calcularTotalGastoComDesconto());
             posicao++;
         }
@@ -159,5 +162,60 @@ public class Shopping {
         System.out.print("Endereco: ");
         String endereco = scanner.nextLine();
         return new Shopping(nome, cnpj, endereco);
+    }
+
+    // ==================== ADICIONADO: identidade do shopping ====================
+
+    // Remove espaco invisivel (U+00A0), acento, espaco duplicado e maiuscula.
+    // " Shopping  Center " e "SHOPPING CENTER" viram "shopping center".
+    public static String normalizarTexto(String texto) {
+        if (texto == null) {
+            return "";
+        }
+        String semEspacoInvisivel = texto.replace('\u00A0', ' ');
+        String semAcento = Normalizer.normalize(semEspacoInvisivel, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "");
+        return semAcento.strip()
+                .replaceAll("\\s+", " ")
+                .toLowerCase(Locale.ROOT);
+    }
+
+    // Chave de comparacao: nome + endereco normalizados
+    public String chaveIdentificacao() {
+        return normalizarTexto(nome) + "|" + normalizarTexto(endereco);
+    }
+
+    // Dois shoppings sao o mesmo se tiverem a mesma chave OU o mesmo CNPJ
+    public boolean mesmaIdentidade(Shopping outro) {
+        if (outro == null) {
+            return false;
+        }
+        if (this.chaveIdentificacao().equals(outro.chaveIdentificacao())) {
+            return true;
+        }
+        String cnpjA = normalizarTexto(this.cnpj);
+        String cnpjB = normalizarTexto(outro.cnpj);
+        return !cnpjA.isEmpty() && cnpjA.equals(cnpjB);
+    }
+
+    public static String texto(String valor) {
+    if (valor == null) {
+        return "";
+    }
+    String semEspacoInvisivel = valor.replace('\u00A0', ' ');
+    String semAcento = java.text.Normalizer
+            .normalize(semEspacoInvisivel, java.text.Normalizer.Form.NFD)
+            .replaceAll("\\p{M}", "");
+    return semAcento.strip()
+            .replaceAll("\\s+", " ")
+            .toLowerCase(java.util.Locale.ROOT);
+}
+
+    public static String semEspacos(String valor, String string) {
+        throw new UnsupportedOperationException("Unimplemented method 'semEspacos'");
+    }
+
+    public static double valorNaoNegativo(double preco, String string) {
+        throw new UnsupportedOperationException("Unimplemented method 'valorNaoNegativo'");
     }
 }

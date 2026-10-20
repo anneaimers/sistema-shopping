@@ -1,0 +1,5 @@
+{
+  "code-runner.runInTerminal": false,
+  "code-runner.ignoreSelection": true,
+  "java.debug.settings.onBuildFailureProceed": false
+}

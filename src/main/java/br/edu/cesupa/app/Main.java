@@ -166,7 +166,7 @@ public class Main {
 
         double totalArrecadado = 0;
         for (CompraEVenda cv : compras) {
-            totalArrecadado += cv.getValorTotal();
+            totalArrecadado += cv.getTotal();
         }
         System.out.printf("2. TOTAL: Faturamento total do shopping: R$ %.2f\n", totalArrecadado);
 

@@ -1,0 +1,34 @@
+-------------------------------------------------------------------------------
+Test set: br.edu.cesupa.ClienteTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.269 s <<< FAILURE! -- in br.edu.cesupa.ClienteTest
+br.edu.cesupa.ClienteTest.pontosAcumulamDescartandoFracaoDeCadaCompra -- Time elapsed: 0.107 s <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'semEspacos'
+	at br.edu.cesupa.model.Shopping.semEspacos(Shopping.java:215)
+	at br.edu.cesupa.model.Cliente.cpf(Cliente.java:118)
+	at br.edu.cesupa.model.Cliente.<init>(Cliente.java:18)
+	at br.edu.cesupa.ClienteTest.pontosAcumulamDescartandoFracaoDeCadaCompra(ClienteTest.java:21)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+br.edu.cesupa.ClienteTest.compraNaoFinalizadaNaoGeraPontosNemHistorico -- Time elapsed: 0.019 s <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'semEspacos'
+	at br.edu.cesupa.model.Shopping.semEspacos(Shopping.java:215)
+	at br.edu.cesupa.model.Cliente.cpf(Cliente.java:118)
+	at br.edu.cesupa.model.Cliente.<init>(Cliente.java:18)
+	at br.edu.cesupa.ClienteTest.compraNaoFinalizadaNaoGeraPontosNemHistorico(ClienteTest.java:34)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+br.edu.cesupa.ClienteTest.pontosConsideramValorComDesconto -- Time elapsed: 0.004 s <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'semEspacos'
+	at br.edu.cesupa.model.Shopping.semEspacos(Shopping.java:215)
+	at br.edu.cesupa.model.Cliente.cpf(Cliente.java:118)
+	at br.edu.cesupa.model.Cliente.<init>(Cliente.java:18)
+	at br.edu.cesupa.ClienteTest.pontosConsideramValorComDesconto(ClienteTest.java:10)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+

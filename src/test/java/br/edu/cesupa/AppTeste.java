@@ -1,4 +1,4 @@
-package br.edu.cesupa.app;
+package br.edu.cesupa;
 
 import br.edu.cesupa.model.Carro;
 import br.edu.cesupa.model.Shopping;

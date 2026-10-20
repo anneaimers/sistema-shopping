@@ -17,7 +17,7 @@ public class CompraEVenda {
     public static final double PERCENTUAL_DESCONTO = 0.10; // 10%
 
     public CompraEVenda(String nomeLoja, Cliente cliente, String tipo) {
-        this.nomeLoja = nomeLoja;
+        this.nomeLoja = Shopping.texto(nomeLoja);
         this.cliente = cliente;
         this.tipo = tipo;
     }
@@ -26,7 +26,7 @@ public class CompraEVenda {
         if (finalizada) {
             throw new IllegalStateException("Compra ja finalizada!");
         }
-        if (produto == null || quantidade <= 0 || valor < 0) {
+        if (produto == null || quantidade <= 0 || !Double.isFinite(valor) || valor < 0) {
             throw new IllegalArgumentException("Produto/quantidade/valor invalidos!");
         }
         produtos.add(produto);

@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------
+Test set: br.edu.cesupa.EstacionamentoTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.136 s <<< FAILURE! -- in br.edu.cesupa.EstacionamentoTest
+br.edu.cesupa.EstacionamentoTest.carroInexistenteNaoGeraCobranca -- Time elapsed: 0.019 s <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'semEspacos'
+	at br.edu.cesupa.model.Shopping.semEspacos(Shopping.java:215)
+	at br.edu.cesupa.model.Cliente.cpf(Cliente.java:118)
+	at br.edu.cesupa.model.Cliente.<init>(Cliente.java:18)
+	at br.edu.cesupa.EstacionamentoTest.carroInexistenteNaoGeraCobranca(EstacionamentoTest.java:85)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+br.edu.cesupa.EstacionamentoTest.saidaLiberaVagaECobraMesmoSemCompra -- Time elapsed: 0.016 s <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'semEspacos'
+	at br.edu.cesupa.model.Shopping.semEspacos(Shopping.java:215)
+	at br.edu.cesupa.model.Cliente.cpf(Cliente.java:118)
+	at br.edu.cesupa.model.Cliente.<init>(Cliente.java:18)
+	at br.edu.cesupa.EstacionamentoTest.saidaLiberaVagaECobraMesmoSemCompra(EstacionamentoTest.java:70)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+

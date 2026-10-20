@@ -45,22 +45,30 @@ public class Estacionamento {
         return capacidade - carros.size();
     }
 
+    // ALTERADO: compara sempre a placa normalizada
     public Carro buscarCarro(String placa) {
+        String placaNormalizada = Carro.normalizarPlaca(placa);
         for (Carro carro : carros) {
-            if (carro.getPlaca().equalsIgnoreCase(placa)) {
+            if (carro.getPlaca() != null && carro.getPlaca().equals(placaNormalizada)) {
                 return carro;
             }
         }
         return null;
     }
 
+    // ALTERADO: a duplicidade e verificada ANTES da lotacao,
+    // para o usuario receber o motivo correto da recusa
     public void adicionarCarro(Carro carro) {
-        if (vagasDisponiveis() == 0) {
-            System.out.println("Estacionamento cheio!");
+        if (carro == null) {
+            System.out.println("Carro invalido, nao estacionado!");
             return;
         }
         if (buscarCarro(carro.getPlaca()) != null) {
-            System.out.println("Carro ja cadastrado!");
+            System.out.println("Carro ja cadastrado! Placa " + carro.getPlaca());
+            return;
+        }
+        if (vagasDisponiveis() == 0) {
+            System.out.println("Estacionamento cheio!");
             return;
         }
         carro.registrarEntrada();
@@ -132,6 +140,10 @@ public class Estacionamento {
         return new Estacionamento(nome, capacidade, valorHora);
     }
 
+    private static double lerDouble(Scanner scanner, String string) {
+        throw new UnsupportedOperationException("Unimplemented method 'lerDouble'");
+    }
+
     private static int lerInteiro(Scanner scanner, String mensagem) {
         while (true) {
             System.out.print(mensagem);
@@ -143,14 +155,6 @@ public class Estacionamento {
         }
     }
 
-    private static double lerDouble(Scanner scanner, String mensagem) {
-        while (true) {
-            System.out.print(mensagem);
-            try {
-                return Double.parseDouble(scanner.nextLine().trim().replace(",", "."));
-            } catch (NumberFormatException e) {
-                System.out.println("Valor invalido, digite um numero.");
-            }
-        }
-    }
+    // >>> MANTENHA AQUI O SEU METODO lerDouble EXATAMENTE COMO ESTA <<<
+    // (ele nao foi alterado, por isso nao foi reescrito)
 }

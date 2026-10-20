@@ -1,0 +1,76 @@
+-------------------------------------------------------------------------------
+Test set: br.edu.cesupa.CompraEVendaTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.265 s <<< FAILURE! -- in br.edu.cesupa.CompraEVendaTest
+br.edu.cesupa.CompraEVendaTest.compraParaLojaAumentaEstoque -- Time elapsed: 0.087 s <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'valorNaoNegativo'
+	at br.edu.cesupa.model.Shopping.valorNaoNegativo(Shopping.java:219)
+	at br.edu.cesupa.model.Produto.<init>(Produto.java:15)
+	at br.edu.cesupa.CompraEVendaTest.compraParaLojaAumentaEstoque(CompraEVendaTest.java:78)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+br.edu.cesupa.CompraEVendaTest.naoPermiteFinalizarDuasVezes -- Time elapsed: 0.037 s <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'valorNaoNegativo'
+	at br.edu.cesupa.model.Shopping.valorNaoNegativo(Shopping.java:219)
+	at br.edu.cesupa.model.Produto.<init>(Produto.java:15)
+	at br.edu.cesupa.CompraEVendaTest.naoPermiteFinalizarDuasVezes(CompraEVendaTest.java:68)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+br.edu.cesupa.CompraEVendaTest.naoAplicaDescontoAbaixoDoLimite -- Time elapsed: 0.053 s <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'valorNaoNegativo'
+	at br.edu.cesupa.model.Shopping.valorNaoNegativo(Shopping.java:219)
+	at br.edu.cesupa.model.Produto.<init>(Produto.java:15)
+	at br.edu.cesupa.CompraEVendaTest.naoAplicaDescontoAbaixoDoLimite(CompraEVendaTest.java:19)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+br.edu.cesupa.CompraEVendaTest.aplicaDescontoAcimaDoLimite -- Time elapsed: 0.004 s <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'valorNaoNegativo'
+	at br.edu.cesupa.model.Shopping.valorNaoNegativo(Shopping.java:219)
+	at br.edu.cesupa.model.Produto.<init>(Produto.java:15)
+	at br.edu.cesupa.CompraEVendaTest.aplicaDescontoAcimaDoLimite(CompraEVendaTest.java:27)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+br.edu.cesupa.CompraEVendaTest.vendaFinalizadaReduzEstoque -- Time elapsed: 0.003 s <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'valorNaoNegativo'
+	at br.edu.cesupa.model.Shopping.valorNaoNegativo(Shopping.java:219)
+	at br.edu.cesupa.model.Produto.<init>(Produto.java:15)
+	at br.edu.cesupa.CompraEVendaTest.vendaFinalizadaReduzEstoque(CompraEVendaTest.java:34)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+br.edu.cesupa.CompraEVendaTest.somaQuantidadesDoMesmoProdutoAntesDeValidarEstoque -- Time elapsed: 0.004 s <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'valorNaoNegativo'
+	at br.edu.cesupa.model.Shopping.valorNaoNegativo(Shopping.java:219)
+	at br.edu.cesupa.model.Produto.<init>(Produto.java:15)
+	at br.edu.cesupa.CompraEVendaTest.somaQuantidadesDoMesmoProdutoAntesDeValidarEstoque(CompraEVendaTest.java:57)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+br.edu.cesupa.CompraEVendaTest.aplicaDescontoNoLimiteDe500Reais -- Time elapsed: 0.005 s <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'valorNaoNegativo'
+	at br.edu.cesupa.model.Shopping.valorNaoNegativo(Shopping.java:219)
+	at br.edu.cesupa.model.Produto.<init>(Produto.java:15)
+	at br.edu.cesupa.CompraEVendaTest.aplicaDescontoNoLimiteDe500Reais(CompraEVendaTest.java:11)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+br.edu.cesupa.CompraEVendaTest.estoqueInsuficienteImpedeVendaSemAlterarProdutos -- Time elapsed: 0.007 s <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'valorNaoNegativo'
+	at br.edu.cesupa.model.Shopping.valorNaoNegativo(Shopping.java:219)
+	at br.edu.cesupa.model.Produto.<init>(Produto.java:15)
+	at br.edu.cesupa.CompraEVendaTest.estoqueInsuficienteImpedeVendaSemAlterarProdutos(CompraEVendaTest.java:44)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+

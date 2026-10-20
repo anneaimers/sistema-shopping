@@ -9,9 +9,10 @@ public class Produto {
 
     public Produto(int id, String nome, int estoque, double preco) {
         this.id = id;
-        this.nome = nome;
+        this.nome = Shopping.texto(nome );
+        if (estoque < 0) throw new IllegalArgumentException("Estoque nao pode ser negativo!" );
         this.estoque = estoque;
-        this.preco = preco;
+        this.preco = Shopping.valorNaoNegativo(preco, "preco" );
     }
 
     public int getId() {
@@ -23,7 +24,7 @@ public class Produto {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = Shopping.texto(nome );
     }
 
     public int getEstoque() {
@@ -35,7 +36,7 @@ public class Produto {
     }
 
     public void setPreco(double preco) {
-        this.preco = preco;
+        this.preco = Shopping.valorNaoNegativo(preco, "preco" );
     }
 
     public void adicionarEstoque(int quantidade) {
